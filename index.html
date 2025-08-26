@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Transkript</title>
+    <link rel="stylesheet" href="/src/index.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="main-layout">
+        <!-- Left Column - Input Forms -->
+        <div class="left-column">
+          <!-- Time Range Section -->
+          <div class="time-section">
+            <div class="time-row">
+              <label>Start:</label>
+              <div class="time-inputs">
+                <input type="number" class="time-input" placeholder="00" min="0" max="99" maxlength="2">
+                <span>:</span>
+                <input type="number" class="time-input" placeholder="00" min="0" max="99" maxlength="2">
+                <span>:</span>
+                <input type="number" class="time-input" placeholder="00" min="0" max="99" maxlength="2">
+                <span>:</span>
+                <input type="number" class="time-input" placeholder="00" min="0" max="23" maxlength="2">
+              </div>
+            </div>
+            
+            <div class="time-row">
+              <label>End:</label>
+              <div class="time-inputs">
+                <input type="number" class="time-input" placeholder="00" min="0" max="99" maxlength="2">
+                <span>:</span>
+                <input type="number" class="time-input" placeholder="00" min="0" max="99" maxlength="2">
+                <span>:</span>
+                <input type="number" class="time-input" placeholder="00" min="0" max="99" maxlength="2">
+                <span>:</span>
+                <input type="number" class="time-input" placeholder="00" min="0" max="23" maxlength="2">
+              </div>
+            </div>
+          </div>
+
+          <!-- Text Section -->
+          <div class="text-section">
+            <label for="transcript-text">Text:</label>
+            <textarea id="transcript-text" class="text-area" placeholder="Enter transcript text here..."></textarea>
+          </div>
+
+          <!-- Button Section -->
+          <div class="button-section">
+            <button class="help-btn">Help</button>
+            <button class="add-btn">Add to Results</button>
+          </div>
+        </div>
+
+        <!-- Right Column - Results -->
+        <div class="right-column">
+          <div class="results-section">
+            <div class="results-header">
+              <label>Results:</label>
+            </div>
+            <div class="results-content">
+              <!-- Results will be displayed here -->
+            </div>
+            <button class="export-btn">Export to TXT</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Edit Dialog Modal -->
+    <div id="editModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Edit Transcript Entry</h3>
+          <span class="close">&times;</span>
+        </div>
+        <div class="modal-body">
+          <div class="edit-time-section">
+            <div class="edit-time-row">
+              <label>Start:</label>
+              <div class="time-inputs">
+                <input type="number" class="edit-time-input" id="editStartH" placeholder="00" min="0" max="99" maxlength="2">
+                <span>:</span>
+                <input type="number" class="edit-time-input" id="editStartM" placeholder="00" min="0" max="99" maxlength="2">
+                <span>:</span>
+                <input type="number" class="edit-time-input" id="editStartS" placeholder="00" min="0" max="99" maxlength="2">
+                <span>:</span>
+                <input type="number" class="edit-time-input" id="editStartMs" placeholder="00" min="0" max="23" maxlength="2">
+              </div>
+            </div>
+            
+            <div class="edit-time-row">
+              <label>End:</label>
+              <div class="time-inputs">
+                <input type="number" class="edit-time-input" id="editEndH" placeholder="00" min="0" max="99" maxlength="2">
+                <span>:</span>
+                <input type="number" class="edit-time-input" id="editEndM" placeholder="00" min="0" max="99" maxlength="2">
+                <span>:</span>
+                <input type="number" class="edit-time-input" id="editEndS" placeholder="00" min="0" max="99" maxlength="2">
+                <span>:</span>
+                <input type="number" class="edit-time-input" id="editEndMs" placeholder="00" min="0" max="23" maxlength="2">
+              </div>
+            </div>
+          </div>
+          
+          <div class="edit-text-section">
+            <label for="editText">Text:</label>
+            <textarea id="editText" class="edit-text-area" placeholder="Enter transcript text here..."></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="save-btn">Save Changes</button>
+          <button class="delete-btn">Delete Entry</button>
+          <button class="cancel-btn">Cancel</button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Error Modal -->
+    <div id="errorModal" class="error-modal">
+      <div class="error-modal-content">
+        <div class="error-modal-header">
+          <h3>Error</h3>
+          <span class="error-close">&times;</span>
+        </div>
+        <div class="error-modal-body" id="errorMessage">
+          Error message will appear here.
+        </div>
+        <div class="error-modal-footer">
+          <button class="error-ok-btn">OK</button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Help Modal -->
+    <div id="helpModal" class="help-modal">
+      <div class="help-modal-content">
+        <div class="help-modal-header">
+          <h3>Transkript Help</h3>
+          <span class="help-close">&times;</span>
+        </div>
+        <div class="help-modal-body">
+          <div class="help-section">
+            <h4>Time Input Format</h4>
+            <ul>
+              <li>Enter times in HH:MM:SS:FR format</li>
+              <li>First 3 fields: 00-99</li>
+              <li>Last field (frames): 00-23</li>
+              <li>Start time must be before end time</li>
+            </ul>
+          </div>
+          
+          <div class="help-section">
+            <h4>How to Use</h4>
+            <ol>
+              <li>Enter start and end times</li>
+              <li>Type your transcript text</li>
+              <li>Click "Add to Results" to save the entry</li>
+              <li>Click on any result item to edit it</li>
+              <li>Use "Export to TXT" to save all results to a file</li>
+            </ol>
+          </div>
+          
+          <div class="help-section">
+            <h4>Important Notes</h4>
+            <ul>
+              <li>Duplicate records are not allowed</li>
+              <li>Results are automatically sorted by start time</li>
+              <li>Exported files use subtitle format</li>
+            </ul>
+          </div>
+        </div>
+        <div class="help-modal-footer">
+          <button class="help-ok-btn">Got it!</button>
+        </div>
+      </div>
+    </div>
+    
+    <script type="module" src="/src/renderer.ts"></script>
+  </body>
+</html>
