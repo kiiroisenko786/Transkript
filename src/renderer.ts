@@ -191,9 +191,9 @@ document.addEventListener('DOMContentLoaded', () => {
     updateResultsDisplay();
     
     // Clear the form
-    textArea.value = '';
-    startInputs.forEach(input => input.value = '');
-    endInputs.forEach(input => input.value = '');
+    // textArea.value = '';
+    // startInputs.forEach(input => input.value = '');
+    // endInputs.forEach(input => input.value = '');
   });
 
   // Help functionality
