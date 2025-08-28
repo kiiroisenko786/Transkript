@@ -76,7 +76,10 @@ document.addEventListener('DOMContentLoaded', () => {
       console.log("Start: " + startTime + " End: " + endTime);
       console.log("Checking overlap with:", result);
       console.log(startTime <= result.start && result.end <= endTime);
-      return (startTime <= result.start && result.end <= endTime);
+      return (startTime <= result.start && endTime >= result.end) || // Full outer
+              (startTime >= result.start && endTime <= result.end) || // Full inner
+              (startTime <= result.start && endTime >= result.start) || // Partial outer
+              (startTime <= result.end && endTime >= result.end);   // Partial inner
     });
   }
 
