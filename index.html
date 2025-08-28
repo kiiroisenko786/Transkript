@@ -81,11 +81,11 @@
               <div class="time-inputs">
                 <input type="number" class="edit-time-input" id="editStartH" placeholder="00" min="0" max="99" maxlength="2">
                 <span>:</span>
-                <input type="number" class="edit-time-input" id="editStartM" placeholder="00" min="0" max="99" maxlength="2">
+                <input type="number" class="edit-time-input" id="editStartM" placeholder="00" min="0" max="59" maxlength="2">
                 <span>:</span>
-                <input type="number" class="edit-time-input" id="editStartS" placeholder="00" min="0" max="99" maxlength="2">
+                <input type="number" class="edit-time-input" id="editStartS" placeholder="00" min="0" max="59" maxlength="2">
                 <span>:</span>
-                <input type="number" class="edit-time-input" id="editStartMs" placeholder="00" min="0" max="23" maxlength="2">
+                <input type="number" class="edit-time-input" id="editStartF" placeholder="00" min="0" max="23" maxlength="2">
               </div>
             </div>
             
@@ -94,11 +94,11 @@
               <div class="time-inputs">
                 <input type="number" class="edit-time-input" id="editEndH" placeholder="00" min="0" max="99" maxlength="2">
                 <span>:</span>
-                <input type="number" class="edit-time-input" id="editEndM" placeholder="00" min="0" max="99" maxlength="2">
+                <input type="number" class="edit-time-input" id="editEndM" placeholder="00" min="0" max="59" maxlength="2">
                 <span>:</span>
-                <input type="number" class="edit-time-input" id="editEndS" placeholder="00" min="0" max="99" maxlength="2">
+                <input type="number" class="edit-time-input" id="editEndS" placeholder="00" min="0" max="59" maxlength="2">
                 <span>:</span>
-                <input type="number" class="edit-time-input" id="editEndMs" placeholder="00" min="0" max="23" maxlength="2">
+                <input type="number" class="edit-time-input" id="editEndF" placeholder="00" min="0" max="23" maxlength="2">
               </div>
             </div>
           </div>
@@ -144,7 +144,9 @@
             <h4>Time Input Format</h4>
             <ul>
               <li>Enter times in HH:MM:SS:FR format</li>
-              <li>First 3 fields: 00-99</li>
+              <li>Hours: 00-99</li>
+              <li>Minutes: 00-59</li>
+              <li>Seconds: 00-59</li>
               <li>Last field (frames): 00-23</li>
               <li>Start time must be before end time</li>
             </ul>
@@ -165,6 +167,7 @@
             <h4>Important Notes</h4>
             <ul>
               <li>Duplicate records are not allowed</li>
+              <li>Overlapping times are not allowed</li>
               <li>Results are automatically sorted by start time</li>
               <li>Exported files use subtitle format</li>
             </ul>

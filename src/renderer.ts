@@ -69,6 +69,17 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // Overlapping time check function
+  function doTimesOverlap(startTime: string, endTime: string, excludeIndex = -1): boolean {
+    return results.some((result, index) => {
+      if (index === excludeIndex) return false;
+      console.log("Start: " + startTime + " End: " + endTime);
+      console.log("Checking overlap with:", result);
+      console.log(startTime <= result.start && result.end <= endTime);
+      return (startTime <= result.start && result.end <= endTime);
+    });
+  }
+
   // Sort results by start time
   function sortResultsByStartTime() {
     results.sort((a, b) => timeToSeconds(a.start) - timeToSeconds(b.start));
@@ -179,6 +190,12 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
+    // Check for overlapping time
+    if (doTimesOverlap(startTime, endTime)) {
+      showError('Overlapping times are not allowed.');
+      return;
+    }
+
     const result = {
       id: Date.now().toString(),
       start: startTime,
@@ -189,11 +206,7 @@ document.addEventListener('DOMContentLoaded', () => {
     results.push(result);
     sortResultsByStartTime();
     updateResultsDisplay();
-    
-    // Clear the form
-    // textArea.value = '';
-    // startInputs.forEach(input => input.value = '');
-    // endInputs.forEach(input => input.value = '');
+    textArea.value = '';
   });
 
   // Help functionality
@@ -243,12 +256,12 @@ document.addEventListener('DOMContentLoaded', () => {
     (document.getElementById('editStartH') as HTMLInputElement).value = startParts[0] || '00';
     (document.getElementById('editStartM') as HTMLInputElement).value = startParts[1] || '00';
     (document.getElementById('editStartS') as HTMLInputElement).value = startParts[2] || '00';
-    (document.getElementById('editStartMs') as HTMLInputElement).value = startParts[3] || '00';
+    (document.getElementById('editStartF') as HTMLInputElement).value = startParts[3] || '00';
     
     (document.getElementById('editEndH') as HTMLInputElement).value = endParts[0] || '00';
     (document.getElementById('editEndM') as HTMLInputElement).value = endParts[1] || '00';
     (document.getElementById('editEndS') as HTMLInputElement).value = endParts[2] || '00';
-    (document.getElementById('editEndMs') as HTMLInputElement).value = endParts[3] || '00';
+    (document.getElementById('editEndF') as HTMLInputElement).value = endParts[3] || '00';
     
     (document.getElementById('editText') as HTMLTextAreaElement).value = result.text;
     
@@ -277,14 +290,14 @@ document.addEventListener('DOMContentLoaded', () => {
       (document.getElementById('editStartH') as HTMLInputElement).value || '00',
       (document.getElementById('editStartM') as HTMLInputElement).value || '00',
       (document.getElementById('editStartS') as HTMLInputElement).value || '00',
-      (document.getElementById('editStartMs') as HTMLInputElement).value || '00'
+      (document.getElementById('editStartF') as HTMLInputElement).value || '00'
     ].join(':');
 
     const endTime = [
       (document.getElementById('editEndH') as HTMLInputElement).value || '00',
       (document.getElementById('editEndM') as HTMLInputElement).value || '00',
       (document.getElementById('editEndS') as HTMLInputElement).value || '00',
-      (document.getElementById('editEndMs') as HTMLInputElement).value || '00'
+      (document.getElementById('editEndF') as HTMLInputElement).value || '00'
     ].join(':');
 
     // Validate start time is before end time
@@ -296,6 +309,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // Check for duplicate records (excluding current record being edited)
     if (isDuplicateRecord(startTime, endTime, editText, currentEditIndex)) {
       showError('This record already exists. Duplicate records are not allowed.');
+      return;
+    }
+
+    // Check for overlapping time
+    if (doTimesOverlap(startTime, endTime)) {
+      showError('Overlapping times are not allowed.');
       return;
     }
 
