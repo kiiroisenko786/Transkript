@@ -1,7 +1,5 @@
 import './index.css';
 
-console.log('👋 This message is being logged by "renderer.ts", included via Vite');
-
 // Wait for DOM to be loaded
 document.addEventListener('DOMContentLoaded', () => {
   const addBtn = document.querySelector('.add-btn') as HTMLButtonElement;
@@ -73,9 +71,6 @@ document.addEventListener('DOMContentLoaded', () => {
   function doTimesOverlap(startTime: string, endTime: string, excludeIndex = -1): boolean {
     return results.some((result, index) => {
       if (index === excludeIndex) return false;
-      console.log("Start: " + startTime + " End: " + endTime);
-      console.log("Checking overlap with:", result);
-      console.log(startTime <= result.start && result.end <= endTime);
       return (startTime <= result.start && endTime >= result.end) || // Full outer
               (startTime >= result.start && endTime <= result.end) || // Full inner
               (startTime <= result.start && endTime >= result.start) || // Partial outer

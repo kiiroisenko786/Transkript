@@ -19,8 +19,9 @@ const config: ForgeConfig = {
   rebuildConfig: {},
   makers: [
     new MakerSquirrel({
+      //iconUrl: "src/transkript_favicon.ico",
       // Sets the icon of the generated Setup.exe (Windows installer)
-      setupIcon: path.resolve(__dirname, 'src', 'transkript_favicon.ico'),
+      setupIcon: "src/transkript_favicon.ico",
     }),
     new MakerZIP({}, ['darwin']),
     new MakerRpm({}),

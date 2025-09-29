@@ -13,7 +13,7 @@ const createWindow = () => {
     width: 1280,
     height: 720,
     resizable: false,
-    icon: path.join(__dirname, 'transkript_favicon.ico'),
+    icon: "src/transkript_favicon.ico",
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
     },
